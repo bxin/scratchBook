@@ -1,6 +1,7 @@
 # To-dos #
 * Need to finalize typical bright sky values, then update all the notebooks as necessary
 * Tony will supply a few 1D source function options, including a flat-topped disk
+* height = 1150km, FWHM = 0.36 arcsec: This doesn't make sense. Probably need to add atmosphere on top of that.
 
 # [saturation_limit.ipynb](saturation_limit.ipynb) #
 For a point source, under three LSST fiducial atmosphere, we look at the saturation limits in each band, and make plots of peak electron counts vs. AB magnitude. A flat SED is assumed for the point source.
