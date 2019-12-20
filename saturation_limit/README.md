@@ -21,6 +21,7 @@ This notebook produces these plots
 This notebook is almost identical to [saturation_limit_trail.ipynb](saturation_limit_trail.ipynb), we just changed the input and look at the results if a satellite is painted black except one bright spot. In this case the Gaussian has a FWHM of 0.7 arcsec.
 
 * Need to finalize typical bright sky values
+
 This notebook produces these plots
 * [Peak_count_by_band_pt_trail_darkSky.pdf](./plots/Peak_count_by_band_pt_trail_darkSky.pdf)
 * [Peak_count_by_band_pt_trail_brightSky.pdf](./plots/Peak_count_by_band_pt_trail_brightSky.pdf)
