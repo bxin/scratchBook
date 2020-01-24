@@ -84,7 +84,7 @@ def hook(run=None, mode=None, raft=None, ccd=None, test_cache=None, test=None, r
         range_limits["state"] = True
         if save_lo > 998:
             
-            range_limits["min"] = -1.
+            range_limits["min"] = 0.
             range_limits["max"] = 18.      
             save_hi = range_limits["max"]
             save_lo = range_limits["min"]
