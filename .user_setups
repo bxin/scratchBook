@@ -1,0 +1,28 @@
+#!/bin/sh
+# This file is expected to be found in ${HOME}/notebooks/.user_setups
+#  It is a shell fragment that will be sourced during kernel startup
+#  when the LSST kernel is started in a JupyterLab environment.  It runs
+#  in the user context and can contain arbitrary shell code.  Exported changes
+#  in its environment will persist into the JupyterLab Python environment.
+
+setup -k -r $HOME/lsst_stack/obs_lsst_data
+setup -k -r $HOME/lsst_stack/obs_lsst
+
+setup -k -r $HOME/notebooks/throughputs
+setup -k -r $HOME/lsst_stack/sims_data
+setup -k -r $HOME/lsst_stack/sims_photUtils
+setup -k -r $HOME/notebooks/syseng_throughputs
+setup -k -r $HOME/lsst_stack/oorb
+setup -k -r $HOME/lsst_stack/legacy-obs_lsstSim
+setup -k -r $HOME/lsst_stack/sims_movingObjects
+setup -k -r $HOME/lsst_stack/cwfs
+export PYTHONPATH=$PYTHONPATH:/home/bxin/notebooks/eTraveler-clientAPI/python
+export PYTHONPATH=$PYTHONPATH:/home/bxin/notebooks/datacat-utilities/python
+export PYTHONPATH=$PYTHONPATH:/home/bxin/notebooks/syseng_throughputs/python
+export PYTHONPATH=$PYTHONPATH:/home/bxin/notebooks/throughputs/python
+export PYTHONPATH=$PYTHONPATH:$HOME/lsst_stack/sims_utils/python
+export PYTHONPATH=$PYTHONPATH:$HOME/lsst_stack/sims_coordUtils/python
+export PYTHONPATH=$PYTHONPATH:$HOME/lsst_stack/sims_photUtils/python
+export PYTHONPATH=$PYTHONPATH:/home/bxin/.local/lib/python3.6/site-packages/
+
+export PATH=$PATH:/home/bxin/lsst_stack/phantomjs-2.1.1-linux-x86_64/bin/
