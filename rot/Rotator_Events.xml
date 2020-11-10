@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://lsst-sal.tuc.noao.edu/schema/SALEventSet.xsl"?>
+<SALEventSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://lsst-sal.tuc.noao.edu/schema/SALEventSet.xsd">
+<!-- Uncomment once SAL supports values in enumerations
+<Enumeration>
+    ControllerState_Standby=0,
+    ControllerState_Disabled=1,
+    ControllerState_Enabled=2,
+    ControllerState_Offline=3,
+    ControllerState_Fault=4
+</Enumeration>
+<Enumeration>
+    OfflineSubstate_PublishOnly=0,
+    OfflineSubstate_Available=1
+</Enumeration>
+<Enumeration>
+    EnabledSubstate_Stationary = 0,
+    EnabledSubstate_MovingPointToPoint=1,
+    EnabledSubstate_SlewingOrTracking=2,
+    EnabledSubstate_ControlledStopping=3,
+    EnabledSubstate_Initializing=4,
+    EnabledSubstate_Relative=5,
+    EnabledSubstate_ConstantVelocity=6
+</Enumeration>
+<Enumeration>
+    ApplicationStatus_HEX_FOLLOWING_ERROR_MASK=0x00000001,
+    ApplicationStatus_HEX_MOVE_COMPLETE_MASK=0x00000002,
+    ApplicationStatus_COMMAND_REJECT_MASK=0x00000020,
+    ApplicationStatus_SAFTEY_INTERLOCK=0x00000040,
+    ApplicationStatus_EXTEND_LIMIT_SWITCH=0x00000080,
+    ApplicationStatus_RETRACT_LIMIT_SWITCH=0x00000100,
+    ApplicationStatus_ETHERCAT_PROBLEM=0x00000200,
+    ApplicationStatus_DDS_COMMAND_SOURCE=0x00000400,
+    ApplicationStatus_MOTION_TIMEOUT=0x00000800,
+    ApplicationStatus_DRIVE_FAULT=0x00002000,
+    ApplicationStatus_SIMULINK_FAULT=0x00004000,
+    ApplicationStatus_ENCODER_FAULT=0x00008000
+</Enumeration>
+-->
+
+<SALEvent>
+    <Subsystem>Rotator</Subsystem>
+    <Version>3.5.1</Version>
+    <Author></Author>
+    <EFDB_Topic>Rotator_logevent_controllerState</EFDB_Topic>
+    <Alias>controllerState</Alias>
+    <Description>State reported by the low level controller. All values except applicationStatus are 1 greater than those reported by the controller for temporary and historical reasons.</Description>
+    <item>
+        <EFDB_Name>controllerState</EFDB_Name>
+        <Description>Basic state. A ControllerState enumeration value. The state names and meanings are the same as standard CSC summaryState, but the numeric values are ordered differently. We report the controller state in addition to summaryState because we need to report a summaryState even when the controller is not connected, and to aid diagnostics, e.g. in case the controller reports an unrecognized state.</Description>
+        <IDL_Type>long</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>offlineSubstate</EFDB_Name>
+        <Description>Substate in OFFLINE mode. An OfflineSubstate enumeration value.</Description>
+        <IDL_Type>long</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>enabledSubstate</EFDB_Name>
+        <Description>Substate in ENABLED mode. An EnabledSubstate enumeration value.</Description>
+        <IDL_Type>long</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>applicationStatus</EFDB_Name>
+        <Description>Application state. A bitmask of ApplicationStatus enumeration values.</Description>
+        <IDL_Type>long</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+</SALEvent>
+<SALEvent>
+    <Subsystem>Rotator</Subsystem>
+    <Version>3.5.1</Version>
+    <Author></Author>
+    <EFDB_Topic>Rotator_logevent_connected</EFDB_Topic>
+    <Alias>connected</Alias>
+    <Description>State of TCP/IP connection to the low level controller.</Description>
+    <item>
+        <EFDB_Name>command</EFDB_Name>
+        <Description>Is the command socket connected (true=yes, false=no)?</Description>
+        <IDL_Type>boolean</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>telemetry</EFDB_Name>
+        <Description>Is the telemetry/config socket connected (true=yes, false=no)?</Description>
+        <IDL_Type>boolean</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+</SALEvent>
+<SALEvent>
+    <Subsystem>Rotator</Subsystem>
+    <Version>3.5.1</Version>
+    <Author></Author>
+    <EFDB_Topic>Rotator_logevent_interlock</EFDB_Topic>
+    <Alias>interlock</Alias>
+    <Description>Rotator interlock: This event is generated when safety interlock is engaged or disengaged</Description>
+    <item>
+        <EFDB_Name>detail</EFDB_Name>
+        <Description>detail</Description>
+        <IDL_Type>string</IDL_Type>
+        <IDL_Size>256</IDL_Size>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>timestamp</EFDB_Name>
+        <Description>timestamp</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+</SALEvent>
+<SALEvent>
+    <Subsystem>Rotator</Subsystem>
+    <Version>3.5.1</Version>
+    <Author></Author>
+    <EFDB_Topic>Rotator_logevent_trackLost</EFDB_Topic>
+    <Alias>trackLost</Alias>
+    <Description>This event is generated if system stops tracking within limits or if we do not receive a new track command within 150ms (three iterations) following the last track command</Description>
+    <item>
+        <EFDB_Name>timestamp</EFDB_Name>
+        <Description>timestamp</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+</SALEvent>
+<SALEvent>
+    <Subsystem>Rotator</Subsystem>
+    <Version>3.5.1</Version>
+    <Author></Author>
+    <EFDB_Topic>Rotator_logevent_tracking</EFDB_Topic>
+    <Alias>tracking</Alias>
+    <Description>Tracking is successful and this event is issued whenever once 3 consecutive 50 ms track commands have been applied</Description>
+    <item>
+        <EFDB_Name>timestamp</EFDB_Name>
+        <Description>timestamp</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+</SALEvent>
+<SALEvent>
+    <Subsystem>Rotator</Subsystem>
+    <Version>3.5.1</Version>
+    <Author></Author>
+    <EFDB_Topic>Rotator_logevent_deviceError</EFDB_Topic>
+    <Alias>deviceError</Alias>
+    <Description>deviceError event is generated if any drive faults occur or if there is a following error in any actuator</Description>
+    <item>
+        <EFDB_Name>code</EFDB_Name>
+        <Description>Error code</Description>
+        <IDL_Type>string</IDL_Type>
+        <IDL_Size>256</IDL_Size>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>device</EFDB_Name>
+        <Description>device</Description>
+        <IDL_Type>string</IDL_Type>
+        <IDL_Size>256</IDL_Size>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>severity</EFDB_Name>
+        <Description>Severity of the error</Description>
+        <IDL_Type>long</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>timestamp</EFDB_Name>
+        <Description>timestamp</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+</SALEvent>
+<SALEvent>
+    <Subsystem>Rotator</Subsystem>
+    <Version>3.5.1</Version>
+    <Author></Author>
+    <EFDB_Topic>Rotator_logevent_inPosition</EFDB_Topic>
+    <Alias>inPosition</Alias>
+    <Description>Event to indicate rotator is in position or not</Description>
+    <item>
+        <EFDB_Name>inPosition</EFDB_Name>
+        <Description>Rotator in position</Description>
+        <IDL_Type>boolean</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+</SALEvent>
+<SALEvent>
+    <Subsystem>Rotator</Subsystem>
+    <Version>3.5.1</Version>
+    <Author></Author>
+    <EFDB_Topic>Rotator_logevent_settingsApplied</EFDB_Topic>
+    <Alias>settingsApplied</Alias>
+    <Description>settingsApplied</Description>
+    <item>
+        <EFDB_Name>positionAngleUpperLimit</EFDB_Name>
+        <Description>Position difference between the commanded position and the actual position that triggers system to switch between slew mode and track mode. Positive range limit (must be less than +90)</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>deg</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>velocityLimit</EFDB_Name>
+        <Description>Velocity limit</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>deg/s</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>accelerationLimit</EFDB_Name>
+        <Description>Acceleration limit</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>deg/s2</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>positionErrorThreshold</EFDB_Name>
+        <Description>Position error threshold</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>deg</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>positionAngleLowerLimit</EFDB_Name>
+        <Description>Position difference between the commanded position and the actual position that triggers system to switch between slew mode and track mode. Negative range limit (must be greater than -90)</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>deg</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>followingErrorThreshold</EFDB_Name>
+        <Description>Deviation between commanded position and actual rotator position that triggers following error event/fault</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>deg</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>trackingSuccessPositionThreshold</EFDB_Name>
+        <Description>RMS deviation over 150ms interval between position command and actual rotator position for triggering tracking and tracklost events</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>deg</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>trackingLostTimeout</EFDB_Name>
+        <Description>Duration between receiving slewing and tracking commands over DDS before tracklost event/fault is declared</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>s</Units>
+        <Count>1</Count>
+    </item>
+</SALEvent>
+<SALEvent>
+    <Subsystem>Rotator</Subsystem>
+    <Version>3.5.1</Version>
+    <Author></Author>
+    <EFDB_Topic>Rotator_logevent_rejectedCommand</EFDB_Topic>
+    <Alias>rejectedCommand</Alias>
+    <Description>Event is issued when a command is rejected</Description>
+    <item>
+        <EFDB_Name>commandValue</EFDB_Name>
+        <Description>command value</Description>
+        <IDL_Type>string</IDL_Type>
+        <IDL_Size>256</IDL_Size>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>detailedState</EFDB_Name>
+        <Description>detailed state</Description>
+        <IDL_Type>string</IDL_Type>
+        <IDL_Size>256</IDL_Size>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+    <item>
+        <EFDB_Name>timestamp</EFDB_Name>
+        <Description>timestamp</Description>
+        <IDL_Type>double</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+</SALEvent>
+<SALEvent>
+    <Subsystem>Rotator</Subsystem>
+    <Version>3.5.1</Version>
+    <Author></Author>
+    <EFDB_Topic>Rotator_logevent_commandableByDDS</EFDB_Topic>
+    <Alias>commandableByDDS</Alias>
+    <Description>When true Rotator is commanded by DDS else its commanded via EUI</Description>
+    <item>
+        <EFDB_Name>state</EFDB_Name>
+        <Description>state</Description>
+        <IDL_Type>boolean</IDL_Type>
+        <Units>unitless</Units>
+        <Count>1</Count>
+    </item>
+</SALEvent></SALEventSet>
